@@ -1,7 +1,10 @@
 services:
-  minecraft:
-    container_name: minecraft-server
-    build: .
+  minecraft-purpur:
+    build: 
+     context: .
+     args:
+        MINECRAFT_VERSION: "1.21.3"  
+        BUILD_NUMBER: "2358"  
     stdin_open: true
     tty: true
     ports:
