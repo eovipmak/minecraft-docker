@@ -6,7 +6,7 @@ ARG BUILD_NUMBER="82"
 
 ARG JAR_NAME=paper-${MINECRAFT_VERSION}-${BUILD_NUMBER}.jar
 
-ENV DOWNLOAD_URL=https://api.papermc.io/v2/projects/paper/${MINECRAFT_VERSION}/builds/${BUILD_NUMBER}/downloads/${JAR_NAME}
+ENV DOWNLOAD_URL=https://api.papermc.io/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/${BUILD_NUMBER}/downloads/${JAR_NAME}
 
 RUN apt update && apt -y install curl tar
 
