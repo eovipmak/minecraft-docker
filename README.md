@@ -51,12 +51,12 @@ Your job now is just to run the command and let docker do its job
 docker compose up -d --build
 ```
 
-> You can send commands to the server using
-> ```
-> docker attach <Contaier ID>
->```
->Then type commands without the / sign.
->
->If you want to exit, just press **Ctrl + P** and **Crtl + Q**. Never press **Ctrl + C** or your server will be shut down.
+You can send commands to the server using
+```
+docker attach <Contaier ID>
+```
+Then type commands without the / sign.
+
+>If you want to exit, just press **Ctrl + P** and **Crtl + Q**. Never press **Ctrl + C** or your server will be shut down immediately.
 
 And that's it, have fun
