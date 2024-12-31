@@ -6,7 +6,7 @@ services:
   stdin_open: true
   tty: true
   ports:
-    - "${PORTS//,/ :}"
+    - "$PORT:$PORT"
   volumes:
     - server:/home/container
   environment:

@@ -1,6 +1,6 @@
 FROM        debian:bullseye-slim
 
-RUN         apt update && apt -y install curl tar jq iproute2 && mkdir -p /mnt/server
+RUN         apt update && apt -y install curl tar jq iproute2
 
 ENV         HOME=/home/container
 
