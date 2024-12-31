@@ -44,6 +44,7 @@ export BUILD_NUMBER
 export JAR_NAME="paper-${MINECRAFT_VERSION}-${BUILD_NUMBER}.jar"
 
 # Getting paper jar file
+cd /mnt/server
 echo "Downloading Minecraft Paper version ${MINECRAFT_VERSION} build ${BUILD_NUMBER}"
 curl -o server.jar https://api.papermc.io/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/${BUILD_NUMBER}/downloads/${JAR_NAME}
 echo "Done!"
