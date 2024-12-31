@@ -8,11 +8,11 @@ services:
   ports:
     - "${PORTS//,/ :}"
   volumes:
-    - server:/mnt/server
+    - server:/home/container
   environment:
     - MINECRAFT_VERSION
     - BUILD_NUMBER
-  command: bash -c "bash /entrypoint.sh && bash /get.sh && cd /mnt/server && java -Xms128M \
+  command: bash -c "bash /entrypoint.sh && bash /get.sh && cd && java -Xms128M \
     -XX:MaxRAMPercentage=95.0 \
     -XX:+ParallelRefProcEnabled \
     -XX:MaxGCPauseMillis=200 \
@@ -38,4 +38,4 @@ services:
     --add-modules=jdk.incubator.vector \
     -jar server.jar"
 volumes:
-  server: {}
+  server:
