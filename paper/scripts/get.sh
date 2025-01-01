@@ -43,26 +43,50 @@ export MINECRAFT_VERSION
 export BUILD_NUMBER
 export JAR_NAME="paper-${MINECRAFT_VERSION}-${BUILD_NUMBER}.jar"
 
-# Getting paper jar file
-cd 
-echo "Downloading Minecraft Paper version ${MINECRAFT_VERSION} build ${BUILD_NUMBER}"
-curl -o server.jar https://api.papermc.io/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/${BUILD_NUMBER}/downloads/${JAR_NAME}
-echo "Done!"
+# Check and download paper jar file if it doesn't exist
+if [ ! -f server.jar ]; then
+    echo "Downloading Minecraft Paper version ${MINECRAFT_VERSION} build ${BUILD_NUMBER}"
+    curl -o server.jar https://api.papermc.io/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/${BUILD_NUMBER}/downloads/${JAR_NAME}
+    echo "Done!"
+else
+    echo "server.jar already exists. Skipping download."
+fi
 
-# Check and get server.properties if not exits
+# Check and get server.properties if it doesn't exist
 if [ ! -f server.properties ]; then
     echo -e "Downloading MC server.properties"
     curl -o server.properties https://raw.githubusercontent.com/parkervcp/eggs/master/minecraft/java/server.properties
+else
+    echo "server.properties already exists. Skipping download."
 fi
 
 # Accept EULA and disable online-mode
-echo "eula=true" > eula.txt && echo "online-mode=false" > server.properties
+if [ ! -f eula.txt ]; then
+    echo "eula=true" > eula.txt
+else
+    if ! grep -q "eula=true" eula.txt; then
+        sed -i 's/^eula=.*/eula=true/' eula.txt
+    fi
+fi
 
-# Getting JDK 21
-echo "Getting JDK 21"
-cd /
-export URL="https://files.tntin.id.vn/upload/jdk-temurin/OpenJDK21U.tar.gz"
-curl -L $URL -o java.tar.gz
-tar xzf java.tar.gz
-ln -s /jdk-21.0.5+11/bin/java  /usr/bin/java
-echo "JDK 21 is installed"
+# Ensure online-mode is set to false
+if ! grep -q "online-mode=false" server.properties; then
+    if grep -q "online-mode=" server.properties; then
+        sed -i 's/^online-mode=.*/online-mode=false/' server.properties
+    else
+        echo "online-mode=false" >> server.properties
+    fi
+fi
+
+# Check and get JDK 21 if java command doesn't exist
+if ! command -v java &> /dev/null; then
+    echo "Getting JDK 21"
+    cd /
+    export URL="https://files.tntin.id.vn/upload/jdk-temurin/OpenJDK21U.tar.gz"
+    curl -L $URL -o java.tar.gz
+    tar xzf java.tar.gz
+    ln -s /jdk-21.0.5+11/bin/java /usr/bin/java
+    echo "JDK 21 is installed"
+else
+    echo "Java is already installed. Skipping download."
+fi

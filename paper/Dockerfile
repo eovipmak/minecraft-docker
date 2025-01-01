@@ -8,4 +8,4 @@ WORKDIR     /home/container
 
 COPY        ./scripts/entrypoint.sh /entrypoint.sh
 COPY        ./scripts/get.sh /get.sh
-CMD         [ "/bin/bash", "/entrypoint.sh" "/get.sh" ]
+CMD         [ "/bin/bash", "/entrypoint.sh", "/get.sh" ]
