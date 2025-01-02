@@ -46,6 +46,14 @@ export URL="https://api.purpurmc.org/v2/purpur/${MINECRAFT_VERSION}/${BUILD_NUMB
 curl -L $URL -o server.jar
 echo "Done!"
 
+# Check and get server.properties if it doesn't exist
+if [ ! -f server.properties ]; then
+    echo -e "Downloading MC server.properties"
+    curl -o server.properties https://raw.githubusercontent.com/parkervcp/eggs/master/minecraft/java/server.properties
+else
+    echo "server.properties already exists. Skipping download."
+fi
+
 # Accept EULA and disable online-mode
 if [ ! -f eula.txt ]; then
     echo "eula=true" > eula.txt
