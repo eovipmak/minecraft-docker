@@ -11,6 +11,6 @@ services:
     - server:/home/container
   environment:
     - BEDROCK_VERSION
-  command: bash -c "bash /entrypoint.sh && bash /get.sh && cd && ./bedrock_server
+  command: bash -c "bash /entrypoint.sh && bash /get.sh && cd && ./bedrock_server"
 volumes:
   server:
