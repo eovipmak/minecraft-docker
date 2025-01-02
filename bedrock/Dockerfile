@@ -7,7 +7,7 @@ ENV         HOME=/home/container
 WORKDIR     /home/container
 
 RUN      apt update && apt upgrade -y \
-         && apt -y --no-install-recommends install ca-certificates curl git unzip zip tar jq wget
+         && apt -y --no-install-recommends install ca-certificates curl git unzip zip tar jq wget iproute2
 
 RUN         if [ "$(uname -m)" = "x86_64" ]; then \
                 dpkg --add-architecture i386 && \

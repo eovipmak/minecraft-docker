@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Check if the server directory exists, if not, create it
-if [ ! -d /mnt/server/ ]; then
-    mkdir /mnt/server/
-fi
-
-# Change to the server directory
-cd /mnt/server
-
 # Generate a random version number to bypass CDN blocking
 RANDVERSION=$(echo $((1 + $RANDOM % 4000)))
 
