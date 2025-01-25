@@ -1,16 +1,15 @@
 services:
- mc-server:
-  build:
-    context: .
-    dockerfile: ./Dockerfile
-  stdin_open: true
-  tty: true
-  ports:
-    - "$PORT:$PORT"
-  volumes:
-    - server:/home/container
-  environment:
-    - BEDROCK_VERSION
-  command: bash -c "bash /entrypoint.sh && bash /get.sh && cd && ./bedrock_server"
+  mc-server:
+    build: .
+    stdin_open: true
+    tty: true
+    ports:
+      - "${PORT:-19132}:${PORT:-19132}"
+    volumes:
+      - server:/home/container
+    environment:
+      - BEDROCK_VERSION=${BEDROCK_VERSION:-latest}
+    command: bash -c "/entrypoint.sh && /get.sh && ./bedrock_server"
+
 volumes:
   server:
